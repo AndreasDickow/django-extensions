@@ -182,9 +182,9 @@ class Command(BaseCommand):
                                 instance,
                                 many_to_many_field.m2m_field_name(),
                                 primary_object)
-                            instance.save()
-                            # TODO: Here, try to delete duplicate instances that are
-                            # disallowed by a unique_together constraint
+                            instance.delete()#instance.save()
+                            # !!! caution to avoid restriction of foreign model referencing this, 
+                            # we did a cascade instead of set_null here, deleting the foreign model
 
             for related_field in related_fields:
                 if related_field.one_to_many:
